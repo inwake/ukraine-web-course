@@ -1,0 +1,33 @@
+div {
+    height: 100px;
+}
+
+.inlineBlock {
+    display: inline-block;
+}
+
+.fourth {
+    width: 25%;
+}
+
+.halfWidth {
+    width: 50%;
+    height: 200px;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.blue {
+    background-color: blue;
+}
+
+#green {
+    background-color: green;
+}
+
+#image {
+    background: url('https://placeimg.com/640/480/nature');
+    background-size: cover;
+}
