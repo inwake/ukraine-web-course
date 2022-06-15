@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Button</title>
+
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+    <h1>Click the button!</h1>
+
+    <div class="container">
+        <button id="button">Click Me</button>
+    </div>
+
+    <script>
+        const button = document.getElementById('button');
+        const container = document.getElementsByClassName('container')[0];
+
+        const buttonWidth = button.clientWidth;
+        const buttonHeight = button.clientHeight;
+
+        const containerWidth = 500;
+        const containerHeight = 500;
+
+        let gameOver = false;
+
+        button.addEventListener('mouseover', onMouseOver);
+        button.addEventListener('click', onClick);
+
+        function onMouseOver() {
+            if (!gameOver) {
+                let newX = newButtonX();
+                let newY = newButtonY();
+
+                button.style.top = newY + 'px';
+                button.style.left = newX + 'px';
+            }
+        }
+
+        function onClick() {
+            if (gameOver) return;
+            gameOver = true;
+            container.style.backgroundColor = 'lime';
+            button.innerText = 'You Win!';
+
+            setInterval(function() {
+                if (container.style.backgroundColor === 'lime') {
+                    container.style.backgroundColor = 'blueviolet';
+                    button.style.backgroundColor = 'lime';
+                } else {
+                    container.style.backgroundColor = 'lime';
+                    button.style.backgroundColor = 'blueviolet';
+                }
+            }, 1000);
+        }
+
+        function newButtonX() {
+            return Math.floor(Math.random() * (containerWidth - buttonWidth));
+        }
+
+        function newButtonY() {
+            return Math.floor(Math.random() * (containerHeight - buttonHeight));
+        }
+    </script>
+    
+</body>
+</html>
