@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Arrays</title>
+
+    <link href="styles.css" rel="stylesheet" />
+</head>
+<body>
+
+    <ul></ul>
+
+    <div class="boxes"></div>
+
+    <script>
+
+        const ul = document.querySelector('ul');
+        const cities = ['New York', 'Kyiv', 'Los Angeles', 'Warszawa'];
+
+        cities.forEach( city => {
+            const element = document.createElement('li');
+            element.innerText = city;
+            ul.appendChild(element);
+        } );
+
+
+
+        const boxes = document.querySelector('.boxes');
+        const colors = ['green', 'blue', 'red', 'yellow'];
+
+        setInterval( () => {
+
+            const boxesCount = document.querySelectorAll('.box').length;
+
+            if (boxesCount < 5) {
+
+                const element = document.createElement('div');
+                element.classList.add('box');
+
+                const colorIndex = Math.floor(Math.random() * colors.length);
+                const color = colors[colorIndex];
+
+                element.style.backgroundColor = color;
+                boxes.appendChild(element);
+
+            }
+
+        }, 1000 );
+
+    </script>
+    
+</body>
+</html>
