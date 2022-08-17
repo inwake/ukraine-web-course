@@ -1,4 +1,6 @@
-const todos = [];
+const savedTodos = JSON.parse(localStorage.getItem('todos'));
+
+const todos = savedTodos ? savedTodos : [];
 
 const todoInput = document.getElementById('todoInput');
 const addTodoButton = document.getElementById('addTodo');
@@ -6,6 +8,8 @@ const todoList = document.getElementById('todoList');
 const demoTodo = document.getElementById('demoTodo');
 
 addTodoButton.addEventListener('click', addTodo);
+
+renderTodos();
 
 function addTodo() {
     const todoInputValue = todoInput.value;
@@ -16,6 +20,7 @@ function addTodo() {
     } );
 
     renderTodos();
+    saveTodos();
 }
 
 function renderTodos() {
@@ -64,6 +69,11 @@ function deleteTodo(event) {
     // call renderTodos function
 
     renderTodos();
+    saveTodos();
+}
+
+function saveTodos() {
+    localStorage.setItem('todos', JSON.stringify(todos));
 }
 
 function uuid() {
