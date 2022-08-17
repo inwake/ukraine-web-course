@@ -11,7 +11,7 @@ function addTodo() {
     const todoInputValue = todoInput.value;
 
     todos.push( {
-        id: '1234',
+        id: uuid(),
         name: todoInputValue
     } );
 
@@ -22,10 +22,8 @@ function renderTodos() {
 
     // remove all todos
 
-    while (todoList.firstChild.nodeName === 'LI'
-        && todoList.firstChild.getAttribute('id') !== 'demoTodo') {
-        if (todoList.firstChild.getAttribute('id') !== 'demoTodo')
-            todoList.removeChild(todoList.lastChild);
+    while (todoList.firstChild) {
+        todoList.removeChild(todoList.lastChild);
     }
 
     // for each todo
@@ -33,10 +31,14 @@ function renderTodos() {
     todos.forEach( todo => {
 
         // clone demo todo
-        const newTodoElement = demoTodo.cloneNode();
+        const newTodoElement = demoTodo.cloneNode(true);
 
         // remove id attribue
         newTodoElement.removeAttribute('id');
+
+        newTodoElement.setAttribute('data-identifier', todo.id);
+
+        newTodoElement.addEventListener('click', deleteTodo);
 
         // set innerText to todo name
         newTodoElement.innerText = todo.name;
@@ -45,7 +47,25 @@ function renderTodos() {
         todoList.appendChild(newTodoElement);
 
     } );
+}
 
-    console.log(todos)
+function deleteTodo(event) {
 
+    // find data identifier
+
+    const id = event.target.dataset.identifier;
+
+    // delete todo with identifier from array
+
+    const todoIndex = todos.findIndex( todo => todo.id === Number(id) );
+
+    if (todoIndex !== -1) todos.splice(todoIndex, 1);
+
+    // call renderTodos function
+
+    renderTodos();
+}
+
+function uuid() {
+    return Math.floor( Math.random() * 1000000000 );
 }
